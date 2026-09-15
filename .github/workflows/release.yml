@@ -163,7 +163,8 @@ jobs:
             local wanted="$1" attempt output
             for attempt in 1 2 3; do
               if output="$(gh api --paginate "repos/$GH_REPO/releases?per_page=100" \
-                --jq ".[] | select(.tag_name == \"$wanted\") | .id" 2>&1)"; then
+                --jq ".[] | select(.tag_name == \"$wanted\") | .id" 2>&1)" \
+                && [ -n "$output" ]; then
                 printf '%s\n' "$output"
                 return 0
               fi
