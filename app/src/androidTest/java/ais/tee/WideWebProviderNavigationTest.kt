@@ -1,10 +1,11 @@
 package ais.tee
 
-import androidx.compose.ui.test.assertDoesNotExist
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,6 +18,6 @@ class WideWebProviderNavigationTest {
     @Test
     fun providerNavigationStaysVisibleWithoutDrawerButton() {
         composeRule.onNodeWithTag("tab_web_service_claude").assertIsDisplayed()
-        composeRule.onNodeWithTag("btn_web_provider_drawer").assertDoesNotExist()
+        assertTrue(composeRule.onAllNodesWithTag("btn_web_provider_drawer").fetchSemanticsNodes().isEmpty())
     }
 }
